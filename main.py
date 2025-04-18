@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from pydantic import BaseModel
 
+from get_llm_response import get_answer # Import the function from your module 
 
 app = FastAPI()
 
@@ -29,7 +30,7 @@ class AnswerResponse(BaseModel):
 @app.post("/ask", response_model=AnswerResponse) 
 def answer_question(request: QuestionRequest): 
     question = request.question 
-    answer = "This is a generic answer." # Replace with actual logic to get the answer 
+    answer = get_answer(question) # Replace with actual logic to get the answer 
     return {"answer": answer} 
 
 if __name__ == "__main__":
